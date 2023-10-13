@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no,width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Ejercicios de Productos Notables</title>
+    <style>
+            body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #exerciseSection {
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        #result {
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        #keyboard {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        button:hover {
+            background-color: #333;
+            color: white;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        a:hover{
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ejercicios de Productos Notables</h1>
+    </header>
+    <main>
+        <section id="exerciseSection">
+            <h2>Ingrese el Ejercicio</h2>
+            <label for "exercise">Ejercicio:</label>
+            <input type="text" id="exercise" />
+            <button id="identifyExercise">Identificar Producto Notable</button>
+            <button id="showKeyboard">Mostrar Teclado</button>
+            <button id="clearExercise">Borrar Ejercicio</button>
+            <br><br>
+            <div id="keyboard">
+                <button>^</button>
+                <button>^2</button>
+                <button>^3</button>
+                <button>√</button>
+                <button>π</button>
+                <button>0</button>
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>4</button>
+                <button>5</button>
+                <br><br>
+                <button>6</button>
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button>+</button>
+                <button>-</button>
+                <button>*</button>
+                <button>/</button>
+                <button>(</button>
+                <button>)</button>
+                <br><br>
+                <button>[</button>
+                <button>]</button>
+                <button>{</button>
+                <button>}</button>
+                <button>a</button>
+                <button>b</button>
+                <button>c</button>
+                <button>d</button>
+                <button>e</button>
+                <button>f</button>
+                <br><br>
+                <button>g</button>
+                <button>h</button>
+                <button>i</button>
+                <button>j</button>
+                <button>k</button>
+                <button>l</button>
+                <button>m</button>
+                <button>n</button>
+                <button>o</button>
+                <button>p</button>
+                <br><br>
+                <button>q</button>
+                <button>r</button>
+                <button>s</button>
+                <button>t</button>
+                <button>u</button>
+                <button>v</button>
+                <button>w</button>
+                <button>x</button>
+                <button>y</button>
+                <button>z</button>
+            </div>
+            <p id="result"></p>
+        </section>
+    </main>
+    <div>
+        <button ><a href="../blog1.html" >REGRESAR</a></button>
+    </div>
+    <footer>
+        <p>Este sitio web identifica productos notables.</p>
+    </footer>
+
+    <script>
+        document.getElementById('clearExercise').addEventListener('click', function () {
+                document.getElementById('exercise').value = '';
+            });
+
+        document.getElementById("identifyExercise").addEventListener("click", function() {
+            const exercise = document.getElementById("exercise").value;
+            const identifiedCategory = identifyProductCategory(exercise);
+            const resultText = identifiedCategory ? `Categoría: ${identifiedCategory}` : "No se pudo identificar la categoría";
+            document.getElementById("result").textContent = resultText;
+        });
+
+        document.getElementById("showKeyboard").addEventListener("click", function() {
+            const keyboard = document.getElementById("keyboard");
+            keyboard.style.display = "block";
+        });
+
+        document.getElementById("keyboard").addEventListener("click", function(event) {
+            if (event.target.tagName === 'BUTTON') {
+                insertText(event.target.textContent);
+            }
+        });
+
+        function insertText(text) {
+            const exerciseField = document.getElementById("exercise");
+            const startPos = exerciseField.selectionStart;
+            const endPos = exerciseField.selectionEnd;
+            const textBefore = exerciseField.value.substring(0, startPos);
+            const textAfter = exerciseField.value.substring(endPos, exerciseField.value.length);
+            exerciseField.value = textBefore + text + textAfter;
+            exerciseField.selectionStart = startPos + text.length;
+            exerciseField.selectionEnd = startPos + text.length;
+            exerciseField.focus();
+        }
+
+        function identifyProductCategory(exercise) {
+            // Elimina espacios y convierte el ejercicio a minúsculas para facilitar la coincidencia
+            const cleanedExercise = exercise.replace(/\s/g, '').toLowerCase();
+
+            const isBinomioAlCubo = cleanedExercise.includes(')^3');
+            const isBinomioAlCuadrado = cleanedExercise.includes(')^2');
+            const isBinomioConjugado = cleanedExercise.includes(')(');
+            const isBinomioConTérminosIguales = cleanedExercise.includes(')(') && 
+                cleanedExercise.split(')(')[0] === cleanedExercise.split(')(');
+            
+            if (isBinomioAlCubo) {
+                return "Binomio al Cubo";
+            } else if (isBinomioAlCuadrado) {
+                return "Binomio al Cuadrado";
+            } else if (isBinomioConjugado) {
+                return "Binomio Conjugado";
+            } else if (isBinomioConTérminosIguales) {
+                return "Binomio Con Términos Iguales";
+            } else {
+                return "No es un producto notable conocido";
+            }
+        }
+    </script>
+</body>
+</html>

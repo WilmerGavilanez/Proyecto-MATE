@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="user-scalable=no,width=device-width, initial-scale=1, maximum-scale=1">
+<head>
+    <title>Agradecimiento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        #mensaje {
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 100px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mensaje">Gracias por tu Participación</div>
+
+    <script>
+        // Después de 3 segundos, mostrar el mensaje de agradecimiento
+        setTimeout(function () {
+            document.getElementById('mensaje').style.display = 'block';
+        }, 1000);
+    </script>
+</body>
+
+</html>

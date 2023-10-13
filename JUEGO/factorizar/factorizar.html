@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no,width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Ejercicios de Producto Notable</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #333;
+        }
+        #exercise-container {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        #keyboard {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 5px 10px;
+            font-size: 16px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+       
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Ejercicios de Producto Notable</h1>
+    </header>
+    <main>
+        <section id="exercise-container">
+            <h2>Generar Ejercicio</h2>
+            <label for="category">Categoría:</label>
+            <select id="category">
+                <option value="binomio_cuadrado">Binomio al Cuadrado</option>
+                <option value="binomio_cubo">Binomio al Cubo</option>
+                <option value="binomio_conjugado">Binomio Conjugado</option>
+                <option value="binomio_terminos_comun">Binomio con Términos en Común</option>
+            </select>
+            <button id="generateExercise">Generar Ejercicio</button>
+            
+            <p id="exerciseText"></p>
+        </section>
+        <section id="exercise-container">
+            <h2>Ingrese el Ejercicio</h2>   
+            <input type="text" id="inputField" readonly>
+            <button id="clearExercise">Borrar Ejercicio</button>
+            <div class="keyboard"><br>
+                <button>^</button>
+                <button>^2</button>
+                <button>^3</button>
+                <button>√</button>
+                <button>π</button>
+                <button>0</button>
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>4</button>
+                <button>5</button>
+                <br><br>
+                <button>6</button>
+                <button>7</button>
+                <button>8</button>
+                <button>9</button>
+                <button>+</button>
+                <button>-</button>
+                <button>*</button>
+                <button>/</button>
+                <button>(</button>
+                <button>)</button>
+                <br><br>
+                <button>[</button>
+                <button>]</button>
+                <button>{</button>
+                <button>}</button>
+                <button>a</button>
+                <button>b</button>
+                <button>c</button>
+                <button>d</button>
+                <button>e</button>
+                <button>f</button>
+                <br><br>
+                <button>g</button>
+                <button>h</button>
+                <button>i</button>
+                <button>j</button>
+                <button>k</button>
+                <button>l</button>
+                <button>m</button>
+                <button>n</button>
+                <button>o</button>
+                <button>p</button>
+                <br><br>
+                <button>q</button>
+                <button>r</button>
+                <button>s</button>
+                <button>t</button>
+                <button>u</button>
+                <button>v</button>
+                <button>w</button>
+                <button>x</button>
+                <button>y</button>
+                <button>z</button>
+            </div>
+            
+            <script>
+                document.getElementById('clearExercise').addEventListener('click', function () {
+                        document.getElementById('inputField').value = '';
+                    });
+                const inputField = document.getElementById('inputField');
+                const keyboardButtons = document.querySelectorAll('.keyboard button');
+
+                keyboardButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        inputField.value += button.textContent;
+                    });
+                });
+            </script>
+        </section>
+    </main>
+    <div>
+        <button><a href="../blog1.html">REGRESAR</a></button>
+        <button><a href="../blog5.html">FINALIZAR</a></button>
+
+    </div>
+    <script>
+        document.getElementById("generateExercise").addEventListener("click", function() {
+            const selectedCategory = document.getElementById("category").value;
+            const exerciseText = generateProductExercise(selectedCategory);
+            document.getElementById("exerciseText").textContent = "Ejercicio: " + exerciseText;
+        });
+        function generateProductExercise(category) {
+            let exercise = "";
+
+            if (category === "binomio_cuadrado") {
+                exercise = generateBinomioCuadrado();
+            } else if (category === "binomio_cubo") {
+                exercise = generateBinomioCubo();
+            } else if (category === "binomio_conjugado") {
+                exercise = generateBinomioConjugado();
+            } else if (category === "binomio_terminos_comun") {
+                exercise = generateBinomioTerminosComun();
+            }
+
+            return exercise;
+        }
+
+        function generateBinomioCuadrado() {
+            const a = getRandomTerm();
+            const b = getRandomTerm();
+            const x = getRandomVariable();
+            const operation = getRandomOperation();
+            return `(${a}${x} ${operation} ${b})^2`;
+        }
+
+        function generateBinomioCubo() {
+            const a = getRandomTerm();
+            const b = getRandomTerm();
+            const x = getRandomVariable();
+            const operation = getRandomOperation();
+            return `(${a}${x} ${operation} ${b})^3`;
+        }
+
+        function generateBinomioConjugado() {
+            const a = getRandomTerm();
+            const b = getRandomTerm();
+            const x = getRandomVariable();
+            const operation = getRandomOperation();
+            return `(${a}${x} ${operation} ${b})(${a}${x} ${operation} ${b})`;
+        }
+
+        function generateBinomioTerminosComun() {
+    const term1 = getRandomTerm();
+    const term2 = getRandomTerm();
+    const term3 = getRandomTerm();
+    const term4 = getRandomTerm();
+    const operation1 = getRandomOperation();
+    const operation2 = getRandomOperation();
+    const variable1 = getRandomVariable();
+    const variable2 = getRandomVariable();
+    
+    const commonTerm = getRandomTerm();
+    
+    // Genera un número aleatorio para determinar si el término común estará a la izquierda o a la derecha
+    const randomPosition = Math.random() < 0.5 ? 'left' : 'right';
+    
+    if (randomPosition === 'left') {
+        return `(${term1}${variable1} ${operation1} ${commonTerm})(${term2}${variable2} ${operation2} ${commonTerm})`;
+    } else {
+        return `(${term2}${variable2} ${operation1} ${commonTerm})(${term2}${variable2} ${operation1} ${commonTerm})`;
+    }
+}
+        function getRandomTerm() {
+            const numerator = Math.floor(Math.random() * 11) - 5;
+            const denominator = Math.floor(Math.random() * 10) + 1;
+            const randomLetter = getRandomVariable();
+            return `${numerator}/${denominator}${randomLetter}`;
+        }
+
+        function getRandomVariable() {
+            const variables = ["x", "y", "z", "a", "b", "c", "d", "e", "z", "f"];
+            return variables[Math.floor(Math.random() * variables.length)];
+        }
+
+        function getRandomOperation() {
+            const operations = ["+", "-"];
+            return operations[Math.floor(Math.random() * operations.length)];
+        }
+    </script>
+    <script>
+        document.getElementById('clearExercise').addEventListener('click', function () {
+            document.getElementById('exercise').value = '';
+        });
+
+        document.getElementById("identifyExercise").addEventListener("click", function () {
+            const exercise = document.getElementById("exercise").value;
+            const identifiedCategory = identifyProductCategory(exercise);
+            const resultText = identifiedCategory ? `Categoría: ${identifiedCategory}` : "No se pudo identificar la categoría";
+            document.getElementById("result").textContent = resultText;
+        });
+
+        document.getElementById("showKeyboard").addEventListener("click", function () {
+            const keyboard = document.getElementById("keyboard");
+            keyboard.style.display = "block";
+        });
+
+        document.getElementById("keyboard").addEventListener("click", function (event) {
+            if (event.target.tagName === 'BUTTON') {
+                insertText(event.target.textContent);
+            }
+        });
+
+        function insertText(text) {
+            const exerciseField = document.getElementById("exercise");
+            const startPos = exerciseField.selectionStart;
+            const endPos = exerciseField.selectionEnd;
+            const textBefore = exerciseField.value.substring(0, startPos);
+            const textAfter = exerciseField.value.substring(endPos, exerciseField.value.length);
+            exerciseField.value = textBefore + text + textAfter;
+            exerciseField.selectionStart = startPos + text.length;
+            exerciseField.selectionEnd = startPos + text.length;
+            exerciseField.focus();
+        }
+
+        function identifyProductCategory(exercise) {
+            // Elimina espacios y convierte el ejercicio a minúsculas para facilitar la coincidencia
+            const cleanedExercise = exercise.replace(/\s/g, '').toLowerCase();
+
+            const isBinomioAlCubo = cleanedExercise.includes(')^3');
+            const isBinomioAlCuadrado = cleanedExercise.includes(')^2');
+            const isBinomioConjugado = cleanedExercise.includes(')(');
+            const isBinomioConTérminosIguales = cleanedExercise.includes(')(') &&
+                cleanedExercise.split(')(')[0] === cleanedExercise.split(')(');
+
+            if (isBinomioAlCubo) {
+                return "Binomio al Cubo";
+            } else if (isBinomioAlCuadrado) {
+                return "Binomio al Cuadrado";
+            } else if (isBinomioConjugado) {
+                return "Binomio Conjugado";
+            } else if (isBinomioConTérminosIguales) {
+                return "Binomio Con Términos Iguales";
+            } else {
+                return "No es un producto notable conocido";
+            }
+        }
+    </script>
+</body>
+</html>
